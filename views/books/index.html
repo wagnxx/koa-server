@@ -6,31 +6,89 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>books page</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="/css/index.css" />
   </head>
   <body>
-    <h1>[[title]]</h1>
-    <ul>
-      {% for item in data -%}
-      <li>
-        [[item.name]]
-      </li>
-      {%- endfor %}
-    </ul>
-    <hr />
-    <h2>vuejs part</h2>
-    <div>
-      <div id="vue-app">
-        <p>{{ name }}</p>
-        <input type="text" v-model="name" />
+    <div class="books">
+      <div class="card">
+        <div class="card__title">
+          <h1>[[title]]</h1>
+        </div>
+        <div class="card__content">
+          <ul>
+            {% for item in data -%}
+            <li>
+              [[item.name]]
+            </li>
+            {%- endfor %}
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__title">
+          <h2>原生js</h2>
+        </div>
+
+        <div class="card__content">
+          <ul id="o-ul"></ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__title">
+          <h2>vuejs part</h2>
+        </div>
+
+        <div class="card__content">
+          <div id="vue-app">
+            <div>
+              <strong>book list</strong>
+              <ul v-if="getBookList.length>0">
+                <li v-for="book in getBookList">
+                  <b>name:</b>
+                  <em>{{ book.name }}</em
+                  >,
+                  <b>bookId:</b>
+                  <em>{{ book.id }}</em
+                  >,
+                </li>
+              </ul>
+              <p v-else>没有数据</p>
+            </div>
+            <p>
+              正在查找 bookId为
+              <strong>
+                {{ id }}
+              </strong>
+              的 bookList
+            </p>
+            <input type="number" v-model="id" />
+          </div>
+        </div>
       </div>
     </div>
+
     <script>
       new Vue({
         el: '#vue-app',
         data: {
-          name: 'hell world'
+          id: 0,
+          bookList: [
+            { id: 1, name: '西游记' },
+            { id: 2, name: '三国演义' },
+            { id: 3, name: '水浒传' },
+            { id: 4, name: '红楼梦' }
+          ]
+        },
+        computed: {
+          getBookList() {
+            const id = this.id;
+            return this.bookList.filter(book => book.id >= id);
+          }
         }
       });
     </script>
+    <script src="/js/index.js"></script>
   </body>
 </html>

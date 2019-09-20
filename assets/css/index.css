@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.card {
+  width: 600px;
+  border: 1px solid #ddd;
+  margin: 10px auto;
+}
+.card__title {
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+}
+.card__content {
+  padding: 10px;
+}
+
+ul {
+  list-style: none;
+}
+
+#o-ul li:first-child {
+  transition: all;
+  animation: li-rotate 3s linear infinite;
+}
+@keyframes li-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(10deg);
+  }
+  70% {
+    transform: rotate(30deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
